@@ -1,0 +1,39 @@
+server:
+  port: 8080
+spring:
+  cache:
+    type: NONE
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=true
+    username: sa
+    password:
+    initialization-mode: always
+    data: classpath:/data_test.sql
+    #Connection Pool Configuration
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 200
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  h2:
+    console:
+      enabled: true
+      path: /public/h2-console
+      settings:
+        trace: false
+        web-allow-others: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: com.anjana.raulpampliega.jooqdemo.ImprovedH2Dialect
+    hibernate:
+      ddl-auto: create-drop

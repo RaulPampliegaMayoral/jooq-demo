@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    active: test
+
+info:
+  app:
+    name: ${spring.application.name}
+    databse: ${spring.datasource.url}

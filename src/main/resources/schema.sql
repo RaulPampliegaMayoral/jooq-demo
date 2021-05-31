@@ -1,0 +1,35 @@
+CREATE TABLE entity (
+	id_entity int4 NOT NULL,
+	create_user varchar(255) NULL,
+	form_saved bool NULL,
+	id_parent int4 NULL,
+	last_modified_date timestamp NULL,
+	"module" varchar(255) NULL,
+	name varchar(255) NULL,
+	object_sub_type varchar(255) NULL,
+	organizational_unit varchar(255) NULL,
+	start_date timestamp NULL,
+	state varchar(255) NOT NULL,
+	validity_date timestamp NULL,
+	"version" int4 NULL,
+	CONSTRAINT entity_pkey PRIMARY KEY (id_entity)
+);
+CREATE TABLE relationship (
+	id_relationship int4 NOT NULL,
+	create_user varchar(255) NULL,
+	id_destination varchar(255) NULL,
+	destination_module varchar(255) NULL,
+	destination_type varchar(255) NULL,
+	form_saved bool NULL,
+	id_parent int4 NULL,
+	last_modified_date timestamp NULL,
+	name varchar(255) NULL,
+	object_sub_type varchar(255) NULL,
+	id_source varchar(255) NULL,
+	source_module varchar(255) NULL,
+	source_type varchar(255) NULL,
+	start_date timestamp NULL,
+	state varchar(255) NULL,
+	validity_date timestamp NULL,
+	CONSTRAINT relationship_pkey PRIMARY KEY (id_relationship)
+);
