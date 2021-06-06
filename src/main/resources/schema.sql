@@ -1,4 +1,4 @@
-CREATE TABLE entity (
+CREATE TABLE ENTITY (
 	id_entity int4 NOT NULL,
 	create_user varchar(255) NULL,
 	form_saved bool NULL,
@@ -14,7 +14,7 @@ CREATE TABLE entity (
 	"version" int4 NULL,
 	CONSTRAINT entity_pkey PRIMARY KEY (id_entity)
 );
-CREATE TABLE relationship (
+CREATE TABLE RELATIONSHIP (
 	id_relationship int4 NOT NULL,
 	create_user varchar(255) NULL,
 	id_destination varchar(255) NULL,

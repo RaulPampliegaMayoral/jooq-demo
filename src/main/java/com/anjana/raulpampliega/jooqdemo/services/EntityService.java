@@ -1,18 +1,18 @@
 package com.anjana.raulpampliega.jooqdemo.services;
 
 import com.anjana.raulpampliega.jooqdemo.model.Entity;
-import com.anjana.raulpampliega.jooqdemo.repositories.CustomEntityRepository;
+import com.anjana.raulpampliega.jooqdemo.repositories.CustomRepository;
 import java.util.List;
 
 public class EntityService {
 
-  private final CustomEntityRepository repository;
+  private final CustomRepository repository;
 
-  public EntityService(CustomEntityRepository repository) {
+  public EntityService(CustomRepository repository) {
     this.repository = repository;
   }
 
   public List<Entity> getAllEntitiesFiltered(List<Integer> ids) {
-    return repository.getByIds(ids);
+    return repository.getEntityByIds(ids);
   }
 }

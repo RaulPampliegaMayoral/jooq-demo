@@ -1,5 +1,6 @@
 package com.anjana.raulpampliega.jooqdemo.model;
 
+import com.anjana.core.enums.State;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.Column;
