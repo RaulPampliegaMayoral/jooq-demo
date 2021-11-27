@@ -1,15 +1,15 @@
 package com.anjana.raulpampliega.jooqdemo.repositories;
 
 import com.anjana.raulpampliega.jooq.model.Tables;
+import com.anjana.raulpampliega.jooqdemo.model.AttributeValue;
 import com.anjana.raulpampliega.jooqdemo.model.Entity;
 import com.anjana.raulpampliega.jooqdemo.model.RelationShip;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.sql.DataSource;
 import org.jooq.DSLContext;
 import org.jooq.Record1;
 import org.jooq.SQLDialect;
-import org.jooq.conf.RenderNameStyle;
+import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.Settings;
 import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,8 @@ public class JOOQRepositoryImpl implements CustomRepository {
 
   @Bean
   public DSLContext context() {
-    return DSL.using(ds, SQLDialect.POSTGRES, new Settings().withRenderNameStyle(RenderNameStyle.AS_IS));
+    return DSL.using(ds, SQLDialect.H2,
+        new Settings().withRenderSchema(false).withRenderNameCase(RenderNameCase.LOWER));
   }
 
   @Override
@@ -32,6 +33,12 @@ public class JOOQRepositoryImpl implements CustomRepository {
     return context().selectFrom(Tables.ENTITY)
         .where(Tables.ENTITY.ID_ENTITY.in(ids))
         .fetchInto(Entity.class);
+  }
+
+  @Override
+  public List<AttributeValue> getAllAttributeValues() {
+    return context().selectFrom(Tables.ATTRIBUTE_VALUE)
+        .fetchInto(AttributeValue.class);
   }
 
   @Override
