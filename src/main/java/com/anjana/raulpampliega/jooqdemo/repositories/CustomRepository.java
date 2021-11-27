@@ -1,6 +1,7 @@
 package com.anjana.raulpampliega.jooqdemo.repositories;
 
 import com.anjana.core.utils.ARISerializer;
+import com.anjana.raulpampliega.jooqdemo.model.AttributeValue;
 import com.anjana.raulpampliega.jooqdemo.model.Entity;
 import com.anjana.raulpampliega.jooqdemo.model.RelationShip;
 import java.util.List;
@@ -21,6 +22,7 @@ public interface CustomRepository {
           + ARISerializer.SEPARATOR + "%%";
 
   List<Entity> getEntityByIds(List<Integer> ids);
+  List<AttributeValue> getAllAttributeValues();
   List<RelationShip> findRelationByInputObject(Integer sourceId, String sourceType);
   List<RelationShip> getDatasetFlags(String username, Integer datasetId);
 }
