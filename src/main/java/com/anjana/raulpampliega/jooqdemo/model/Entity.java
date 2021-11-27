@@ -1,6 +1,7 @@
 package com.anjana.raulpampliega.jooqdemo.model;
 
-import com.anjana.core.enums.State;
+import com.anjana.core.customers.enums.State;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import lombok.Setter;
 // JavaX
 @javax.persistence.Entity
 @Table(name = "entity")
-public class Entity {
+public class Entity implements Serializable {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "module")

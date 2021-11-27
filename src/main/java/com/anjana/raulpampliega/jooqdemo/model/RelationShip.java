@@ -1,9 +1,9 @@
 package com.anjana.raulpampliega.jooqdemo.model;
 
-import com.anjana.core.enums.ModuleType;
-import com.anjana.core.enums.State;
+import com.anjana.core.customers.enums.State;
 import com.anjana.core.exception.AnjanaException;
 import com.anjana.core.utils.ARISerializer;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 // JavaX
 @Entity
 @Table(name = "relationship")
-public class RelationShip {
+public class RelationShip implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sc_pk_relationship_seq")
@@ -52,7 +52,7 @@ public class RelationShip {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "source_module")
-  com.anjana.core.enums.ModuleType sourceModule;
+  ModuleType sourceModule;
 
   // Id destination object
   @Column(name = "id_destination")
@@ -63,7 +63,7 @@ public class RelationShip {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "destination_module")
-  com.anjana.core.enums.ModuleType destinationModule;
+  ModuleType destinationModule;
 
   @Column(name = "object_sub_type")
   private String objectSubType;
