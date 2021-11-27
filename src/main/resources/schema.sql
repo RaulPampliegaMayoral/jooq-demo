@@ -1,35 +1,11 @@
-CREATE TABLE ENTITY (
-	id_entity int4 NOT NULL,
-	create_user varchar(255) NULL,
-	form_saved bool NULL,
-	id_parent int4 NULL,
-	last_modified_date timestamp NULL,
-	"module" varchar(255) NULL,
-	name varchar(255) NULL,
-	object_sub_type varchar(255) NULL,
-	organizational_unit varchar(255) NULL,
-	start_date timestamp NULL,
-	state varchar(255) NOT NULL,
-	validity_date timestamp NULL,
-	"version" int4 NULL,
-	CONSTRAINT entity_pkey PRIMARY KEY (id_entity)
-);
-CREATE TABLE RELATIONSHIP (
-	id_relationship int4 NOT NULL,
-	create_user varchar(255) NULL,
-	id_destination varchar(255) NULL,
-	destination_module varchar(255) NULL,
-	destination_type varchar(255) NULL,
-	form_saved bool NULL,
-	id_parent int4 NULL,
-	last_modified_date timestamp NULL,
-	name varchar(255) NULL,
-	object_sub_type varchar(255) NULL,
-	id_source varchar(255) NULL,
-	source_module varchar(255) NULL,
-	source_type varchar(255) NULL,
-	start_date timestamp NULL,
-	state varchar(255) NULL,
-	validity_date timestamp NULL,
-	CONSTRAINT relationship_pkey PRIMARY KEY (id_relationship)
-);
+create table attribute_definition (id_attribute_definition integer not null, description varchar(255), label varchar(255), label_translation_key varchar(255), last_modified_date timestamp, module varchar(255), name varchar(255), place_holder varchar(255), place_holder_translation_key varchar(255), short_description_translation_key varchar(255), start_date timestamp, attribute_type varchar(255), primary key (id_attribute_definition))
+create table attribute_definition_value (id_attribute_definition_value integer not null, id_attribute_definition integer, label_select varchar(255), value varchar(255), primary key (id_attribute_definition_value))
+create table attribute_value (id_attribute_value integer not null, i18n varchar(5), id_object integer, id_template_attribute integer, object_sub_type varchar(255), value varchar(255), id_attribute_definition integer, primary key (id_attribute_value))
+create table entity (id_entity integer not null, create_user varchar(255), form_saved boolean, id_parent integer, last_modified_date timestamp, module varchar(255), name varchar(255), object_sub_type varchar(255), organizational_unit varchar(255), start_date timestamp, state varchar(255), validity_date timestamp, version integer, primary key (id_entity))
+create table relationship (id_relationship integer not null, create_user varchar(255), id_destination varchar(255), destination_module varchar(255), destination_type varchar(255), form_saved boolean, id_parent integer, last_modified_date timestamp, module varchar(255), name varchar(255), object_sub_type varchar(255), id_source varchar(255), source_module varchar(255), source_type varchar(255), start_date timestamp, state varchar(255), validity_date timestamp, primary key (id_relationship))
+alter table if exists attribute_definition add constraint UK_sss05y0ocg01jq762y9oa6syr unique (name)
+alter table if exists attribute_definition_value add constraint UK809elrsskbtlegsk138fskfqi unique (id_attribute_definition_value, label_select)
+alter table if exists attribute_definition_value add constraint UKsddlr1hw8reakbwufmfb6r3ia unique (id_attribute_definition_value, value)
+create index fn_object_related on attribute_value (id_object, object_sub_type)
+alter table if exists attribute_definition_value add constraint FKd8anm6pphlevbfovgyufwfm9e foreign key (id_attribute_definition) references attribute_definition
+alter table if exists attribute_value add constraint FKk6hfltpvnpg7r61685iu0gjyn foreign key (id_attribute_definition) references attribute_definition
