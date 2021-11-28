@@ -34,6 +34,7 @@ public class JINQRepositoryImpl implements CustomRepository {
   @Override
   public List<AttributeValue> getAllAttributeValues() {
     return jinqJPAStreamProvider.streamAll(entityManager, AttributeValue.class)
+        .sortedBy(AttributeValue::getId)
         .collect(Collectors.toList());
   }
 

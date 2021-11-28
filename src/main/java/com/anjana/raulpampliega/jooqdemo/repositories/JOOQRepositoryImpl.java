@@ -38,6 +38,7 @@ public class JOOQRepositoryImpl implements CustomRepository {
   @Override
   public List<AttributeValue> getAllAttributeValues() {
     return context().selectFrom(Tables.ATTRIBUTE_VALUE)
+        .orderBy(Tables.ATTRIBUTE_VALUE.ID_ATTRIBUTE_VALUE)
         .fetchInto(AttributeValue.class);
   }
 

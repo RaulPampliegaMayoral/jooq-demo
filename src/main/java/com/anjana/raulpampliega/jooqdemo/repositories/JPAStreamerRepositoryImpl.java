@@ -1,6 +1,7 @@
 package com.anjana.raulpampliega.jooqdemo.repositories;
 
 import com.anjana.raulpampliega.jooqdemo.model.AttributeValue;
+import com.anjana.raulpampliega.jooqdemo.model.AttributeValue$;
 import com.anjana.raulpampliega.jooqdemo.model.Entity;
 import com.anjana.raulpampliega.jooqdemo.model.Entity$;
 import com.anjana.raulpampliega.jooqdemo.model.RelationShip;
@@ -53,7 +54,9 @@ public class JPAStreamerRepositoryImpl implements CustomRepository {
 
   @Override
   public List<AttributeValue> getAllAttributeValues() {
-    return null;
+    return jpaStreamer.stream(AttributeValue.class)
+        .sorted(AttributeValue$.id)
+        .collect(Collectors.toList());
   }
 
   @Override
