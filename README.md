@@ -3,7 +3,9 @@ Example project for JPAStreamer, JOOQ or JINQ
 
 Execution time with the different libraries
 
-JINQ
+
+**JINQ**
+````
 ---------------------------------------------
 ns         %     Task name
 ---------------------------------------------
@@ -11,8 +13,9 @@ ns         %     Task name
 089023500  012%  getAllDSAFromSourceRelationship
 026828400  004%  getEntities
 045532200  006%  getRelationsShipDatasetFlags
-
-JOOQ
+````
+**JOOQ**
+````
 ---------------------------------------------
 ns         %     Task name
 ---------------------------------------------
@@ -20,8 +23,9 @@ ns         %     Task name
 021368600  003%  getAllDSAFromSourceRelationship
 009240900  001%  getEntities
 009983700  001%  getRelationsShipDatasetFlags
-
-JPAStreamer
+````
+**JPAStreamer**
+````
 ---------------------------------------------
 ns         %     Task name
 ---------------------------------------------
@@ -29,3 +33,4 @@ ns         %     Task name
 033178900  011%  getAllDSAFromSourceRelationship
 024116400  008%  getEntities
 029418000  009%  getRelationsShipDatasetFlags
+````
