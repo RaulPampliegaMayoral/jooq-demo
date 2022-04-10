@@ -13,10 +13,12 @@ import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.Settings;
 import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Qualifier("JOOQRepository")
 public class JOOQRepositoryImpl implements CustomRepository {
 
   @Autowired

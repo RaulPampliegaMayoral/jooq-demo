@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 public class JinqTest extends Base {
 
-  public JinqTest(@Qualifier("JINQRepositoryImpl") CustomRepository repository) {
+  public JinqTest(@Qualifier("JINQRepository") CustomRepository repository) {
     super(repository);
   }
 }

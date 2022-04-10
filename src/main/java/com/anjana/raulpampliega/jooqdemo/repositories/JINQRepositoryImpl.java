@@ -9,9 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.jinq.jpa.JPQL;
 import org.jinq.jpa.JinqJPAStreamProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Qualifier("JINQRepository")
 public class JINQRepositoryImpl implements CustomRepository {
 
   @PersistenceContext

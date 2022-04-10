@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 public class JpaStreamerTest extends Base {
 
-  public JpaStreamerTest(@Qualifier("JPAStreamerRepositoryImpl") CustomRepository repository) {
+  public JpaStreamerTest(@Qualifier("JPAStreamerRepository") CustomRepository repository) {
     super(repository);
   }
 }

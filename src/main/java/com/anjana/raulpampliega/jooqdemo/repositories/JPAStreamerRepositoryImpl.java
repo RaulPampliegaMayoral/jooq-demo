@@ -10,9 +10,11 @@ import com.speedment.jpastreamer.application.JPAStreamer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Qualifier("JPAStreamerRepository")
 public class JPAStreamerRepositoryImpl implements CustomRepository {
 
   private final JPAStreamer jpaStreamer;
