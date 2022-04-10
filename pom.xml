@@ -19,6 +19,7 @@
 		<anjana.version>4.3.0-SNAPSHOT</anjana.version>
 		<jpa-streamer-version>1.0.2</jpa-streamer-version>
 		<jooq.version>3.14.11</jooq.version>
+		<blaze-persistence.version>1.6.6</blaze-persistence.version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +79,25 @@
 			<groupId>org.jinq</groupId>
 			<artifactId>jinq-jpa</artifactId>
 			<version>1.8.34</version>
+		</dependency>
+		<!-- Blaze Persistence -->
+		<dependency>
+			<groupId>com.blazebit</groupId>
+			<artifactId>blaze-persistence-core-api</artifactId>
+			<version>${blaze-persistence.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.blazebit</groupId>
+			<artifactId>blaze-persistence-core-impl</artifactId>
+			<version>${blaze-persistence.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.blazebit</groupId>
+			<artifactId>blaze-persistence-integration-hibernate-5.4</artifactId>
+			<version>${blaze-persistence.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
