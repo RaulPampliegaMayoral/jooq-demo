@@ -21,18 +21,19 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 @Log4j2
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, ExecutionTimeTestListener.class})
-public class Base {
-  
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+    ExecutionTimeTestListener.class})
+public abstract class BaseTest {
+
   private CustomRepository repository;
-  
-  public Base(CustomRepository customRepository) {
+
+  public BaseTest(CustomRepository customRepository) {
     this.repository = customRepository;
   }
 
   @Test
   void getEntities() {
-    List<Integer> idsToFind = Arrays.asList(7,8,9);
+    List<Integer> idsToFind = Arrays.asList(7, 8, 9);
     List<Integer> entities = repository.getEntityByIds(idsToFind).stream()
         .map(Entity::getId).collect(Collectors.toList());
 
