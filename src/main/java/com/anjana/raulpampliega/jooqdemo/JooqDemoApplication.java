@@ -1,6 +1,5 @@
 package com.anjana.raulpampliega.jooqdemo;
 
-import com.speedment.jpastreamer.application.JPAStreamer;
 import javax.persistence.EntityManagerFactory;
 import org.jinq.jpa.JPAQueryLogger;
 import org.jinq.jpa.JinqJPAStreamProvider;
@@ -10,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableJpaRepositories(basePackages = {"com.anjana.raulpampliega.jooqdemo"})
 @EntityScan(basePackages = {"com.anjana.raulpampliega.jooqdemo.model"})
