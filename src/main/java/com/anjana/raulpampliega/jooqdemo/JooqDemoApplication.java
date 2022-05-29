@@ -1,7 +1,6 @@
 package com.anjana.raulpampliega.jooqdemo;
 
 import javax.persistence.EntityManagerFactory;
-import org.jinq.jpa.JPAQueryLogger;
 import org.jinq.jpa.JinqJPAStreamProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -23,8 +22,6 @@ public class JooqDemoApplication {
 	@Autowired
 	JinqJPAStreamProvider jinqProvider(EntityManagerFactory emf) {
 		JinqJPAStreamProvider streams = new JinqJPAStreamProvider(emf);
-		streams.setHint("queryLogger",
-				(JPAQueryLogger) (query, positionParameters, namedParameters) -> System.out.println("  " + query));
 		return streams;
 	}
 }
