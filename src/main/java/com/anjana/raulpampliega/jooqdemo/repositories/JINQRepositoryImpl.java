@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.jinq.jpa.JPQL;
 import org.jinq.jpa.JinqJPAStreamProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,17 +15,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier("JINQRepository")
+@RequiredArgsConstructor
 public class JINQRepositoryImpl implements CustomRepository {
 
   @PersistenceContext
-  private EntityManager entityManager;
-  private JinqJPAStreamProvider jinqJPAStreamProvider;
-
-  public JINQRepositoryImpl(EntityManager entityManager,
-      JinqJPAStreamProvider jinqJPAStreamProvider) {
-    this.entityManager = entityManager;
-    this.jinqJPAStreamProvider = jinqJPAStreamProvider;
-  }
+  private final EntityManager entityManager;
+  private final JinqJPAStreamProvider jinqJPAStreamProvider;
 
   @Override
   public List<Entity> getEntityByIds(List<Integer> ids) {
