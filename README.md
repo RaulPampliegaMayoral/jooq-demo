@@ -40,10 +40,10 @@ ns         %     Task name
 ---------------------------------------------
 ns         %     Task name
 ---------------------------------------------
-1398308700  085%  getAttributeValues
-060205200  004%  getAllDSAFromSourceRelationship
-042980900  003%  getEntities
-040493300  002%  getRelationsShipDatasetFlags
-110158500  007%  testGetAllVersionsFromEntity
+669077900  081%  getAttributeValues
+030187700  004%  getAllDSAFromSourceRelationship
+021949000  003%  getEntities
+026982800  003%  getRelationsShipDatasetFlags
+073893700  009%  testGetAllVersionsFromEntity
 ````
 
