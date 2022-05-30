@@ -34,3 +34,16 @@ ns         %     Task name
 024116400  008%  getEntities
 029418000  009%  getRelationsShipDatasetFlags
 ````
+
+**BlazePersistence**
+````
+---------------------------------------------
+ns         %     Task name
+---------------------------------------------
+1398308700  085%  getAttributeValues
+060205200  004%  getAllDSAFromSourceRelationship
+042980900  003%  getEntities
+040493300  002%  getRelationsShipDatasetFlags
+110158500  007%  testGetAllVersionsFromEntity
+````
+
