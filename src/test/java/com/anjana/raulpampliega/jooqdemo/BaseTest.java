@@ -8,21 +8,23 @@ import com.anjana.raulpampliega.jooqdemo.repositories.CustomRepository;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-@Log4j2
+@Slf4j
 @EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
     ExecutionTimeTestListener.class})
+@DirtiesContext()
 public abstract class BaseTest {
 
   private CustomRepository repository;

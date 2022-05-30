@@ -2,7 +2,9 @@ package com.anjana.raulpampliega.jooqdemo.repositories;
 
 import com.anjana.raulpampliega.jooqdemo.model.AttributeValue;
 import com.anjana.raulpampliega.jooqdemo.model.Entity;
+import com.anjana.raulpampliega.jooqdemo.model.EntityCte;
 import com.anjana.raulpampliega.jooqdemo.model.RelationShip;
+import com.blazebit.persistence.CriteriaBuilder;
 import com.blazebit.persistence.CriteriaBuilderFactory;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @RequiredArgsConstructor
@@ -60,5 +63,25 @@ public class BlazePersistenceRepositoryImpl implements CustomRepository {
         .select("r1.source")
         .end()
         .getResultList();
+  }
+
+  @Transactional
+  public List<EntityCte> getAllVersions(Integer entityId) {
+
+    CriteriaBuilder<EntityCte> cb = cbf.create(entityManager, EntityCte.class)
+        .withRecursive(EntityCte.class)
+        .from(Entity.class, "e")
+        .bind("id").select("e.id")
+        .bind("ancestor").select("e.idParent")
+        .where("e.idParent").eq(entityId)
+        .unionAll()
+        .from(Entity.class, "e")
+        .innerJoinOn(EntityCte.class, "parent")
+        .on("e.idParent").eqExpression("parent.id")
+        .end()
+        .bind("id").select("e.id")
+        .bind("ancestor").select("e.idParent")
+        .end();
+    return cb.from(EntityCte.class).getResultList();
   }
 }
