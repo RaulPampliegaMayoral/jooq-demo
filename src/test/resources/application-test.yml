@@ -7,12 +7,10 @@ spring:
     activate:
       on-profile: test
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:db;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;INIT=CREATE SCHEMA IF NOT EXISTS anjana
+    driverClassName: org.postgresql.Driver
     username: sa
     password: sa
     initialization-mode: always
-    #data: classpath:/import.sql
 
     #Connection Pool Configuration
     hikari:
@@ -28,7 +26,7 @@ spring:
   jpa:
     show-sql: true
     generate-ddl: true
-    database-platform: com.anjana.raulpampliega.jooqdemo.ImprovedH2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     hibernate:
       ddl-auto: create-drop
       default_schema: anjana
