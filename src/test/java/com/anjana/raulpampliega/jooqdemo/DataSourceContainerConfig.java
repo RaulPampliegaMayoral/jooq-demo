@@ -2,11 +2,12 @@ package com.anjana.raulpampliega.jooqdemo;
 
 import java.util.Collections;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.testcontainers.containers.JdbcDatabaseContainer;
+import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 @Configuration
@@ -14,33 +15,53 @@ public class DataSourceContainerConfig {
 
   private JdbcDatabaseContainer jdbcDatabaseContainer;
 
-  @Value("spring.datasource.username")
-  private String user;
-  @Value("spring.datasource.password")
-  private String password;
+  private final String databaseName = "anjana";
 
-  private void initContainer() {
+  @Bean
+  @ConfigurationProperties("spring.datasource.mysql")
+  public DataSourceProperties mysqlDataSourceProperties() {
+    return new DataSourceProperties();
+  }
+
+  @Bean
+  @ConfigurationProperties("spring.datasource.postgresql")
+  public DataSourceProperties postgresqlDataSourceProperties() {
+    return new DataSourceProperties();
+  }
+
+  private DataSourceProperties initPostgresql() {
+    DataSourceProperties properties = postgresqlDataSourceProperties();
+
     jdbcDatabaseContainer = (JdbcDatabaseContainer) new PostgreSQLContainer("postgres:latest")
-        .withUsername(user)
-        .withPassword(password)
-        .withDatabaseName("anjana")
+        .withUsername(properties.getUsername())
+        .withPassword(properties.getPassword())
+        .withDatabaseName(databaseName)
+        .withInitScript("schema/postgresql.schema.sql")
         .withTmpFs(Collections.singletonMap("/testtmpfs", "rw"));
     jdbcDatabaseContainer.start();
+
+    return properties;
+  }
+
+  private DataSourceProperties initMysql() {
+    DataSourceProperties properties = mysqlDataSourceProperties();
+
+    jdbcDatabaseContainer = new MySQLContainer<>("mysql:latest")
+        .withUsername(properties.getUsername())
+        .withPassword(properties.getPassword())
+        .withDatabaseName(databaseName)
+        .withTmpFs(Collections.singletonMap("/testtmpfs", "rw"));
+    jdbcDatabaseContainer.start();
+
+    return properties;
   }
 
   @Bean
   public DataSource getDataSource() {
-    initContainer();
+    DataSourceProperties properties = initPostgresql();
 
-    DataSourceBuilder builder = DataSourceBuilder.create();
-    String url = String.format("jdbc:postgresql://%s:%d/anjana", jdbcDatabaseContainer.getHost(),
-        jdbcDatabaseContainer.getFirstMappedPort());
-
-    builder.driverClassName("org.postgresql.Driver");
-    builder.url(url);
-    builder.username(user);
-    builder.password(password);
-
-    return builder.build();
+    return properties.initializeDataSourceBuilder()
+        .url(jdbcDatabaseContainer.getJdbcUrl())
+        .build();
   }
 }
